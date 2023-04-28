@@ -5,13 +5,13 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import * as Cesium from 'cesium';
+import 'cesium/Build/CesiumUnminified/Widgets/widgets.css'
 
 onMounted(() => {
     const viewer = new Cesium.Viewer('cesiumContainer', {
-        //设置地形
-        terrainProvider: Cesium.createWorldTerrain({
-            requestWaterMask: true,
-            requestVertexNormals: true
+        terrainProvider: Cesium.createWorldTerrain(),
+        imageryProvider: new Cesium.TileMapServiceImageryProvider({
+            url: 'node_modules/cesium/Build/CesiumUnminified/Assets/Textures/NaturalEarthII',
         })
     });
 })
