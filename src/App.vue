@@ -1,22 +1,22 @@
 <template>
-  <!-- <router-view></router-view>
-   -->
-  <div id="cesiumContainer"></div>
+  <router-view></router-view>
+
+  <!-- <div id="cesiumContainer"></div> -->
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import * as Cesium from 'cesium';
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4MWFmMjMwYS05NDA2LTQwMDQtYjcyZC1hZjFhYTFiMWMyYmIiLCJpZCI6MTMxNjg1LCJpYXQiOjE2ODIxNTY3NDB9.C4Ga99OWyhq6kwu_D09bTu-WshUX48mvqGrF-T7ou1I'
-window.CESIUM_BASE_URL = 'node_modules/cesium/Build/CesiumUnminified/'
+// window.CESIUM_BASE_URL = 'node_modules/cesium/Build/CesiumUnminified/'
 
-onMounted(() => {
-  const viewer = new Cesium.Viewer('cesiumContainer', {
+// onMounted(() => {
+//   const viewer = new Cesium.Viewer('cesiumContainer', {
     // terrainProvider: Cesium.createWorldTerrain(),
     // imageryProvider: new Cesium.TileMapServiceImageryProvider({
     //   url: 'node_modules/cesium/Build/CesiumUnminified/Assets/Textures/NaturalEarthII',
     // })
-  });
+  // });
   // const imageryProvider = new Cesium.ArcGisMapServerImageryProvider({
   //   url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
   // });
@@ -34,7 +34,7 @@ onMounted(() => {
   //   url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
   // });
   // viewer.imageryLayers.addImageryProvider(layer);
-})
+// })
 </script>
 
 <style scoped></style>
