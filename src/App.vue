@@ -17,23 +17,23 @@ onMounted(() => {
     //   url: 'node_modules/cesium/Build/CesiumUnminified/Assets/Textures/NaturalEarthII',
     // })
   });
-  const imageryProvider = new Cesium.ArcGisMapServerImageryProvider({
-    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
-  });
-  viewer.imageryLayers.addImageryProvider(imageryProvider);
-  let layer_mapbox = new Cesium.MapboxStyleImageryProvider({
-    url: "https://api.mapbox.com/styles/v1",
-    username: "18251827232",
-    styleId: "cl25yd6a400f314nuqan9i8hi",
-    accessToken: "pk.eyJ1IjoiMTgyNTE4MjcyMzIiLCJhIjoiY2wyNGY4bmdvMTM3ZjNqbzUxbWc1Yml5dyJ9.gP_TR5sxxKYeHelFzQnrvA",
-    scaleFactor: true
-  });
-  viewer.imageryLayers.addImageryProvider(layer_mapbox);
+  // const imageryProvider = new Cesium.ArcGisMapServerImageryProvider({
+  //   url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer'
+  // });
+  // viewer.imageryLayers.addImageryProvider(imageryProvider);
+  // let layer_mapbox = new Cesium.MapboxStyleImageryProvider({
+  //   url: "https://api.mapbox.com/styles/v1",
+  //   username: "18251827232",
+  //   styleId: "cl25yd6a400f314nuqan9i8hi",
+  //   accessToken: "pk.eyJ1IjoiMTgyNTE4MjcyMzIiLCJhIjoiY2wyNGY4bmdvMTM3ZjNqbzUxbWc1Yml5dyJ9.gP_TR5sxxKYeHelFzQnrvA",
+  //   scaleFactor: true
+  // });
+  // viewer.imageryLayers.addImageryProvider(layer_mapbox);
 
-  let layer = new Cesium.UrlTemplateImageryProvider({
-    url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
-  });
-  viewer.imageryLayers.addImageryProvider(layer);
+  // let layer = new Cesium.UrlTemplateImageryProvider({
+  //   url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+  // });
+  // viewer.imageryLayers.addImageryProvider(layer);
 })
 </script>
 
