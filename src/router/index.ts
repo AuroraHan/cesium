@@ -6,7 +6,7 @@ import GlbColor from "@/components/0510GLBColor/index.vue";
 import TilesHeight from "@/components/05103DtilesHeight/index.vue";
 
 const routes = [
-  //   { path: '/', component: Test },
+  { path: "/", component: main },
   { path: "/main", component: main },
   { path: "/test", component: FeaturePcking },
   { path: "/glb", component: Glb },
