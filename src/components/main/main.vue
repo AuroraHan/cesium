@@ -10,14 +10,14 @@ onMounted(() => {
     const viewer = new Cesium.Viewer('cesiumContainer', {
         infoBox: false,
         //设置地形
-        // terrainProvider: Cesium.createWorldTerrain({
-        //     requestWaterMask: true,
-        //     requestVertexNormals: true
-        // })
+        terrainProvider: Cesium.createWorldTerrain({
+            requestWaterMask: true,
+            requestVertexNormals: true
+        })
     });
 
     // 设置地球的初始位置
-    const initialPosition = Cesium.Cartesian3.fromDegrees(116.404, 39.904, 6000000); // 北京的经纬度，高度为10,000,000米
+    const initialPosition = Cesium.Cartesian3.fromDegrees(112.199265, 31.035423, 60000); // 北京的经纬度，高度为10,000,000米
     viewer.scene.camera.setView({
         destination: initialPosition,
         // orientation: {
