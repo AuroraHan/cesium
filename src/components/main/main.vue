@@ -17,7 +17,7 @@ onMounted(() => {
     });
 
     // 设置地球的初始位置
-    const initialPosition = Cesium.Cartesian3.fromDegrees(112.199265, 31.035423, 60000); // 北京的经纬度，高度为10,000,000米
+    const initialPosition = Cesium.Cartesian3.fromDegrees(112.199265, 31.035423, 60000); // 荆门的经纬度，高度为10,000,000米
     viewer.scene.camera.setView({
         destination: initialPosition,
         // orientation: {
@@ -35,6 +35,14 @@ onMounted(() => {
         credit: 'Amap'
     })
     viewer.imageryLayers.addImageryProvider(gaodeImageryProvider)
+
+    //加载地形数据
+    const terrainProvider = new Cesium.CesiumTerrainProvider({
+        url: Cesium.IonResource.fromAssetId(1),
+        requestWaterMask: true,//请求水体效果所需要的海岸线数据
+        requestVertexNormals: true,//请求地形照明数据
+    })
+    viewer.terrainProvider = terrainProvider
 })
 
 
