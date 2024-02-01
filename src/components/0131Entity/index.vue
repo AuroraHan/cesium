@@ -7,10 +7,10 @@
 import { onMounted } from 'vue';
 import * as Cesium from 'cesium';
 
-onMounted(() => {
+onMounted(async () => {
     const viewer = new Cesium.Viewer('cesiumContainer', {
         infoBox: false,
-        terrainProvider: Cesium.createWorldTerrain({
+        terrainProvider: await Cesium.createWorldTerrainAsync({
             requestWaterMask: true,
             requestVertexNormals: true
         })
@@ -54,14 +54,62 @@ onMounted(() => {
             numberOfVerticalLines: 6, //沿轮廓的周长绘制的垂直线的数量
             // stRotation: 0.0, // 纹理从北方逆时针旋转
             // granularity: Cesium.Math.RADIANS_PER_DEGREE, // 椭圆上各点之间的角距离
-            rotation: Cesium.Math.toRadians(45)
+            rotation: Cesium.Math.toRadians(45) //旋转角度
             // classificationType: Cesium.ClassificationType.TERRAIN,
             // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
         },
     });
     viewer.zoomTo(viewer.entities);
 
+    let handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas)
+    let eventType = Cesium.ScreenSpaceEventType.LEFT_CLICK;
+    handler.setInputAction((event: any) => {
+        console.log(event.position);
+        //讲屏幕像素转成经纬度
+        let cartesian3 = viewer.scene.camera.pickEllipsoid(event.position);
+        let cartorgraphic = Cesium.Cartographic.fromCartesian(cartesian3!);
+        const long = Cesium.Math.toDegrees(cartorgraphic.longitude)
+        const lat = Cesium.Math.toDegrees(cartorgraphic.latitude)
+        console.log(long, lat);
+
+
+        var pickedEntities = drillPickEntities(viewer, event.position);
+        console.log(pickedEntities);
+
+
+    }, eventType);
+
+    //自动添加监听
+    viewer.selectedEntityChanged.addEventListener((entity) => {
+        console.log(entity, 'oooo');
+
+    })
+
 
 })
+
+//拾取点击的实体
+const drillPickEntities = (viewer: Cesium.Viewer, windowPosition: any) => {
+    var i;
+    var entity;
+    var picked;
+    var pickedPrimitives = viewer.scene.drillPick(windowPosition);
+    var length = pickedPrimitives.length;
+    var result = [];
+    var hash = {};
+
+    for (i = 0; i < length; i++) {
+        picked = pickedPrimitives[i];
+        entity = Cesium.defaultValue(picked.id, picked.primitive.id);
+        if (
+            entity instanceof Cesium.Entity &&
+            !Cesium.defined(hash[entity.id])
+        ) {
+            result.push(entity);
+            hash[entity.id] = true;
+        }
+    }
+    return result;
+}
 </script>
 <style scoped lang='scss'></style>
