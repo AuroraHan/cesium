@@ -10,10 +10,10 @@ onMounted(() => {
     const viewer = new Cesium.Viewer('cesiumContainer', {
         infoBox: false,
         //设置地形
-        terrainProvider: Cesium.createWorldTerrain({
-            requestWaterMask: true,
-            requestVertexNormals: true
-        })
+        // terrainProvider: Cesium.createWorldTerrain({
+        //     requestWaterMask: true,
+        //     requestVertexNormals: true
+        // })
     });
 
     // 设置地球的初始位置
