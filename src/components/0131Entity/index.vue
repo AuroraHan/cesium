@@ -59,6 +59,27 @@ onMounted(async () => {
             // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
         },
     });
+
+    //走廊
+    const redCorridor = viewer.entities.add({
+        name: 'redcorridor',
+        position: Cesium.Cartesian3.fromDegrees(112.189265, 31.035423, 0.0),
+        corridor: {
+            positions: Cesium.Cartesian3.fromDegreesArray([
+                112.18,
+                31.03,
+                112.17,
+                31.03,
+                112.17,
+                31.02,
+            ]),
+            width: 400.0,
+            height: 400.0,
+            cornerType: Cesium.CornerType.BEVELED,
+            extrudedHeight: 700.0,
+            material: Cesium.Color.RED.withAlpha(0.5),
+        }
+    })
     viewer.zoomTo(viewer.entities);
 
     let handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas)
