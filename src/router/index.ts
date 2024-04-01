@@ -13,7 +13,7 @@ const routes = [
   { path: "/glb", component: Glb },
   { path: "/glbColor", component: GlbColor },
   { path: "/tilesHeight", component: TilesHeight },
-  { path: "/EntityE", component: EntityE },
+  { path: "/entityE", component: EntityE },
 ];
 
 const router = createRouter({

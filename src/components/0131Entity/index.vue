@@ -1,11 +1,18 @@
 <!-- 实体对象 -->
 <template>
     <div id="cesiumContainer"></div>
+    <div class="panel">
+        <div ref="lonAndlat"></div>
+    </div>
 </template>
 
 <script setup lang='ts'>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import * as Cesium from 'cesium';
+import { useMousePosition } from "@/hooks/useMousePosition";
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4MWFmMjMwYS05NDA2LTQwMDQtYjcyZC1hZjFhYTFiMWMyYmIiLCJpZCI6MTMxNjg1LCJpYXQiOjE2ODIxNTY3NDB9.C4Ga99OWyhq6kwu_D09bTu-WshUX48mvqGrF-T7ou1I'
+
+const lonAndlat = ref()
 
 onMounted(async () => {
     const viewer = new Cesium.Viewer('cesiumContainer', {
@@ -60,6 +67,10 @@ onMounted(async () => {
         },
     });
 
+
+    //鼠标点击获取经纬度
+    useMousePosition(viewer.canvas, viewer, lonAndlat.value)
+
     //走廊
     const redCorridor = viewer.entities.add({
         name: 'redcorridor',
@@ -85,24 +96,12 @@ onMounted(async () => {
     let handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas)
     let eventType = Cesium.ScreenSpaceEventType.LEFT_CLICK;
     handler.setInputAction((event: any) => {
-        console.log(event.position);
-        //讲屏幕像素转成经纬度
-        let cartesian3 = viewer.scene.camera.pickEllipsoid(event.position);
-        let cartorgraphic = Cesium.Cartographic.fromCartesian(cartesian3!);
-        const long = Cesium.Math.toDegrees(cartorgraphic.longitude)
-        const lat = Cesium.Math.toDegrees(cartorgraphic.latitude)
-        console.log(long, lat);
-
-
         var pickedEntities = drillPickEntities(viewer, event.position);
         console.log(pickedEntities);
-
-
     }, eventType);
 
     //自动添加监听
     viewer.selectedEntityChanged.addEventListener((entity) => {
-        console.log(entity, 'oooo');
 
     })
 
@@ -133,4 +132,18 @@ const drillPickEntities = (viewer: Cesium.Viewer, windowPosition: any) => {
     return result;
 }
 </script>
-<style scoped lang='scss'></style>
+<style scoped>
+.panel {
+    position: absolute;
+    top: 5%;
+    left: 3%;
+    width: 200px;
+    height: 30px;
+    background-color: #fff;
+    opacity: 0.6;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+}
+</style>
