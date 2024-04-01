@@ -10,7 +10,6 @@
 import { onMounted, ref } from 'vue';
 import * as Cesium from 'cesium';
 import { useMousePosition } from "@/hooks/useMousePosition";
-Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4MWFmMjMwYS05NDA2LTQwMDQtYjcyZC1hZjFhYTFiMWMyYmIiLCJpZCI6MTMxNjg1LCJpYXQiOjE2ODIxNTY3NDB9.C4Ga99OWyhq6kwu_D09bTu-WshUX48mvqGrF-T7ou1I'
 
 const lonAndlat = ref()
 
