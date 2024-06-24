@@ -23,7 +23,6 @@ onMounted(() => {
 const init = () => {
   const viewer = new Cesium.Viewer('cesiumContainer', {
     infoBox: false,
-
   });
   let layer = new Cesium.UrlTemplateImageryProvider({
     url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
