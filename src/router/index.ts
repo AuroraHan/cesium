@@ -5,6 +5,7 @@ import Glb from "@/components/0509GLB/index.vue";
 import GlbColor from "@/components/0510GLBColor/index.vue";
 import TilesHeight from "@/components/05103DtilesHeight/index.vue";
 import EntityE from "@/components/0131Entity/index.vue";
+import Fire from "@/views/particle/fire.vue";
 
 const routes = [
   // { path: "/", component: main },
@@ -14,6 +15,7 @@ const routes = [
   { path: "/glbColor", component: GlbColor },
   { path: "/tilesHeight", component: TilesHeight },
   { path: "/entityE", component: EntityE },
+  { path: "/fire", component: Fire },
 ];
 
 const router = createRouter({
