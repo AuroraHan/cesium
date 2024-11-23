@@ -46,7 +46,7 @@ const init = () => {
     // viewer.imageryLayers.addImageryProvider(layer);
 
     //去除logo
-    // viewer.cesiumWidget.creditContainer.style.display = false
+    viewer.cesiumWidget.creditContainer.style.display = 'none';
     //显示帧率
     viewer.scene.debugShowFramesPerSecond = true;
     viewer.scene.globe.depthTestAgainstTerrain = true;

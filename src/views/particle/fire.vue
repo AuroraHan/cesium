@@ -70,11 +70,12 @@ onUnmounted(() => {
 <style scoped>
 .my-index {
     position: absolute;
-    left: 180px;
-    top: 0;
-    width: 300px;
-    height: 40px;
-    background-color: red;
+    left: 11%;
+    top: 2%;
     z-index: 99;
+
+    button {
+        margin-right: 4px;
+    }
 }
 </style>
