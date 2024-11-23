@@ -39,39 +39,39 @@ const init = () => {
 
   // 监听点击事件，拾取坐标
   const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-  handler.setInputAction((e:any) => {
+  handler.setInputAction((e: any) => {
     const clickPosition = viewer.scene.camera.pickEllipsoid(e.position);
     const randiansPos = Cesium.Cartographic.fromCartesian(clickPosition!);
     console.log(
       "经度：" +
-        Cesium.Math.toDegrees(randiansPos.longitude) +
-        ", 纬度：" +
-        Cesium.Math.toDegrees(randiansPos.latitude)
+      Cesium.Math.toDegrees(randiansPos.longitude) +
+      ", 纬度：" +
+      Cesium.Math.toDegrees(randiansPos.latitude)
     );
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 }
 </script>
 
 <style scoped>
-.container{
+.container {
   width: 100%;
   height: 100vh;
   display: flex;
 }
 
-.left{
+.left {
   width: 10%;
   height: 100%;
   background-color: aqua;
 }
 
-.right{
+.right {
   width: 90%;
   height: 100%;
   background-color: rebeccapurple;
 }
 
-#cesiumContainer{
+#cesiumContainer {
   width: 100%;
   height: 100%;
 }
