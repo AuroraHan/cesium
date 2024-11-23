@@ -1,8 +1,8 @@
 <template>
     <!-- 火焰效果 -->
     <div class="my-index">
-        <button  @click="onInit">渲染火焰</button>
-        <button  @click="onClear">清除</button>
+        <button @click="onInit">渲染火焰</button>
+        <button @click="onClear">清除</button>
     </div>
 </template>
 

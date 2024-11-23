@@ -15,7 +15,7 @@ const routes = [
   { path: "/glbColor", component: GlbColor },
   { path: "/tilesHeight", component: TilesHeight },
   { path: "/entityE", component: EntityE },
-  { path: "/fire", component: Fire },
+  { path: "/fire", name: 'fire', component: Fire },
 ];
 
 const router = createRouter({

@@ -1,78 +1,119 @@
 <template>
-  <div class="container">
-    <div class="left">
-      案例描述
+    <div class="container">
+        <div class="left">
+            <div class="title">案例</div>
+            <div class="demos">
+                <div class="item" v-for="(item) in demoList" @click="onclick(item)">{{ item.name }}</div>
+            </div>
+
+        </div>
+        <div class="right">
+            <div id="cesiumContainer"></div>
+            <router-view></router-view>
+        </div>
     </div>
-    <div class="right">
-      <div id="cesiumContainer"></div>
-      <router-view></router-view>
-    </div>
-  </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import * as Cesium from 'cesium';
 import store from "@/store/store";
+import { useRouter } from 'vue-router';
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4MWFmMjMwYS05NDA2LTQwMDQtYjcyZC1hZjFhYTFiMWMyYmIiLCJpZCI6MTMxNjg1LCJpYXQiOjE2ODIxNTY3NDB9.C4Ga99OWyhq6kwu_D09bTu-WshUX48mvqGrF-T7ou1I'
-
+const router = useRouter();
 onMounted(() => {
-  init()
+    init()
 })
 
+const demoList = ref([
+    {
+        name: '火焰效果',
+        path: 'fire'
+    }
+])
+
+const onclick = (item: any) => {
+    router.push({ name: item.path })
+}
+
 const init = () => {
-  const viewer = new Cesium.Viewer('cesiumContainer', {
-    infoBox: false,
-  });
-  let layer = new Cesium.UrlTemplateImageryProvider({
-    url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
-  });
-  viewer.imageryLayers.addImageryProvider(layer);
+    const viewer = new Cesium.Viewer('cesiumContainer', {
+        infoBox: false,
+    });
+    // let layer = new Cesium.UrlTemplateImageryProvider({
+    //     url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+    // });
+    // viewer.imageryLayers.addImageryProvider(layer);
 
-  //去除logo
-  // viewer.cesiumWidget.creditContainer.style.display = false
-  //显示帧率
-  viewer.scene.debugShowFramesPerSecond = true;
-  viewer.scene.globe.depthTestAgainstTerrain = true;
+    //去除logo
+    // viewer.cesiumWidget.creditContainer.style.display = false
+    //显示帧率
+    viewer.scene.debugShowFramesPerSecond = true;
+    viewer.scene.globe.depthTestAgainstTerrain = true;
 
-  store.commit('initViewer', viewer)
+    store.commit('initViewer', viewer)
 
-  // 监听点击事件，拾取坐标
-  const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-  handler.setInputAction((e: any) => {
-    const clickPosition = viewer.scene.camera.pickEllipsoid(e.position);
-    const randiansPos = Cesium.Cartographic.fromCartesian(clickPosition!);
-    console.log(
-      "经度：" +
-      Cesium.Math.toDegrees(randiansPos.longitude) +
-      ", 纬度：" +
-      Cesium.Math.toDegrees(randiansPos.latitude)
-    );
-  }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    // 监听点击事件，拾取坐标
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    handler.setInputAction((e: any) => {
+        const clickPosition = viewer.scene.camera.pickEllipsoid(e.position);
+        const randiansPos = Cesium.Cartographic.fromCartesian(clickPosition!);
+        console.log(
+            "经度：" +
+            Cesium.Math.toDegrees(randiansPos.longitude) +
+            ", 纬度：" +
+            Cesium.Math.toDegrees(randiansPos.latitude)
+        );
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
+    width: 100%;
+    height: 100vh;
+    display: flex;
 }
 
 .left {
-  width: 10%;
-  height: 100%;
-  background-color: aqua;
+    width: 10%;
+    height: 100%;
+    background-color: rgb(239, 236, 201);
+    margin-right: 4px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 22px;
+    }
+
+    .demos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .item {
+            cursor: pointer;
+            line-height: 28px;
+
+            &:hover {
+                color: dodgerblue;
+            }
+        }
+    }
 }
 
 .right {
-  width: 90%;
-  height: 100%;
-  background-color: rebeccapurple;
+    width: 90%;
+    height: 100%;
+    background-color: rebeccapurple;
 }
 
 #cesiumContainer {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 </style>
